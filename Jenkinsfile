@@ -6,8 +6,11 @@ podTemplate(containers: [
     volumes: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
-    def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id']]
+    //def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id']]
+    def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
+                        sh "aws ecr get-login-password --region ${region}"
 
+                    }
     node(POD_LABEL) {
         stage('Check awscli version') {
             container('helm-agent') {
@@ -16,11 +19,10 @@ podTemplate(containers: [
             }
         }
         stage('Check terraform version') {
-            container('helm-agent') {
-                withAWS(credentials: 'aws-direct', region: 'us-east-2') {
-                    sh "aws ecr get-login-password --region region | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"
+            container('docker') {
 
-                }
+                sh "docker login --username AWS --password ${awsEcrPwd} 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"    
+            
                 /*
                 sh "mkdir ~/.aws"
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id', accessKeyVariable: 'Access Key ID', secretKeyVariable: 'Secret Access Key']]) {
