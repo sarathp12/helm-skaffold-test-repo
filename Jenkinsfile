@@ -61,6 +61,12 @@ podTemplate(containers: [
                 sh "aws ecr get-login"
                 */
             }
+            stage('Deploy K8') {
+                container('helm-agent') {
+                    sh "skaffold run"
+                }
+                
+            }
             
         }
     }
