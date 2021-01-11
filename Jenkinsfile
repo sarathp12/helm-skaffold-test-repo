@@ -8,7 +8,7 @@ podTemplate(containers: [
 ]) {
     //def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id']]
     def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
-                        sh "aws ecr get-login-password --region ${region}"
+                        sh "aws ecr get-login-password --region \"us-east-2\""
 
                     }
     node(POD_LABEL) {
