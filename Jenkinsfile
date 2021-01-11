@@ -31,7 +31,7 @@ podTemplate(containers: [
                     cat mypwd.txt | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo
                     docker build -t skaffold-image .
                     docker tag skaffold-image 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo/skaffold-image
-                    docker push 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-reposkaffold-image
+                    docker push 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo/skaffold-image
                     '''
 
                 /*
