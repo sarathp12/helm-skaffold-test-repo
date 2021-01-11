@@ -16,7 +16,7 @@ podTemplate(containers: [
         stage('Check terraform version') {
             container('helm-agent') {
                 withAWS(credentials:'aws-id') {
-                    aws ecr get-login-password --region "us-east-2" | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo
+                    aws ecr get-login-password --region "us-east-2" | docker login --username AWS --password-stdin '471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo'
                 }
                 //sh "aws ecr get-login"
             }
