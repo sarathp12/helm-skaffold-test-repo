@@ -19,7 +19,7 @@ podTemplate(containers: [
             container('helm-agent') {
                 sh "mkdir ~/.aws"
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-                    sh "echo \"\[login-profile\]\" >> ~/.aws/credentials"
+                    sh "echo \"[login-profile]\" >> ~/.aws/credentials"
                     sh "echo \"AWS_ACCESS_KEY_ID: ${accessKeyVariable}\" >> ~/.aws/credentials"
                     sh "echo \"AWS_SECRET_ACCESS_KEY: ${secretKeyVariable}\" >> ~/.aws/credentials"
 
