@@ -8,6 +8,9 @@ podTemplate(containers: [
 ]) {
     //def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id']]
     node(POD_LABEL) {
+        stage('checkout') {
+            git url: 'https://github.com/sarathp12/helm-skaffold-test-repo.git', branch: 'main'
+        }
         
         stage('Check awscli version') {
             container('helm-agent') {
