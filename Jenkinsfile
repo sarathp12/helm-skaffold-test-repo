@@ -27,16 +27,14 @@ podTemplate(containers: [
         stage('Check terraform version') {
             container('docker') {
 
-                sh "ls"
-                /*
                 sh '''
                     cat mypwd.txt | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo
-                    docker build -t skaffold-image -f ./Dockerfile
+                    docker build -t skaffold-image .
                     docker tag skaffold-image 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo/
                     docker push 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo
                     '''
 
-                
+                /*
                 sh "apk add curl"
                 sh '''
                     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &&\
