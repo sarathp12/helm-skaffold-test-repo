@@ -13,17 +13,20 @@ podTemplate(containers: [
             container('helm-agent') {
                 sh "helm version"
                 sh "skaffold version"
-                /*
+                
                 def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
-                        sh "aws ecr get-login-password --region \"us-east-2\""
+                        sh "aws ecr get-login-password --region \"us-east-2\" >> mypwd.txt"
 
                 }
-                sh "echo ${awsEcrPwd} >> myfile.txt"
-                */
+                
             }
         }
         stage('Check terraform version') {
             container('docker') {
+
+                sh "echo \"I am Running\" && ls"
+
+                /*
                 sh "apk add curl"
                 sh '''
                     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &&\
@@ -38,7 +41,7 @@ podTemplate(containers: [
 
                 //sh "docker login --username AWS --password ${awsEcrPwd} 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"    
             
-                /*
+                
                 sh "mkdir ~/.aws"
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id', accessKeyVariable: 'Access Key ID', secretKeyVariable: 'Secret Access Key']]) {
                     sh "echo \"[login-profile]\" >> ~/.aws/credentials"
