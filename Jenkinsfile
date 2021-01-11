@@ -7,11 +7,11 @@ podTemplate(containers: [
         hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')
 ]) {
     //def awsCredentials = [[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-id']]
-    def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
+    node(POD_LABEL) {
+        def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
                         sh "aws ecr get-login-password --region \"us-east-2\""
 
                     }
-    node(POD_LABEL) {
         stage('Check awscli version') {
             container('helm-agent') {
                 sh "helm version"
