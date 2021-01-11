@@ -17,7 +17,7 @@ podTemplate(containers: [
                 sh "helm version"
                 sh "skaffold version"
                 
-                def awsEcrPwd = withAWS(credentials: 'aws-direct', region: 'us-east-2') {
+                def awsEcrPwd = withAWS(credentials: 'aws-direct-id', region: 'us-east-2') {
                         sh "aws ecr get-login-password --region \"us-east-2\" >> mypwd.txt"
 
                 }
