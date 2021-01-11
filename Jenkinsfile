@@ -27,9 +27,9 @@ podTemplate(containers: [
                 sh "apk add curl"
                 sh '''
                     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" &&\
-                    unzip awscliv2.zip &&\
-                    ./aws/install
+                    unzip awscliv2.zip
                     '''
+                sh "./aws/install"
                 withAWS(credentials: 'aws-direct', region: 'us-east-2') {
                         sh "aws ecr get-login-password --region \"us-east-2\" | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"
 
