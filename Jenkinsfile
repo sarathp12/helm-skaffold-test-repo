@@ -25,6 +25,9 @@ podTemplate(containers: [
             container('docker') {
 
                 sh "cat mypwd.txt | docker login --username AWS --password-stdin 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"
+                sh "docker build -t skaffold-image ."
+                sh "docker tag skaffold-image 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo/"
+                sh "docker push 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo"
 
                 /*
                 sh "apk add curl"
