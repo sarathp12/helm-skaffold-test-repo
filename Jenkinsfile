@@ -24,7 +24,7 @@ podTemplate(containers: [
         stage('Check terraform version') {
             container('docker') {
 
-                sh "echo \"I am Running\" && ls"
+                "sh cat mypwd.txt"
 
                 /*
                 sh "apk add curl"
