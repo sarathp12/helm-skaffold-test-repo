@@ -10,4 +10,4 @@ deploy:
     - name: skaffold-helm
       chartPath: charts
       artifactOverrides:
-        image: 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo:latest
+        image: 471574026140.dkr.ecr.us-east-2.amazonaws.com/test-psp-repo
